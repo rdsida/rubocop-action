@@ -2,7 +2,7 @@
 
 require './spec/spec_helper'
 
-describe Github::Data do
+RSpec.describe Github::Data do
   subject { Github::Data.new(event) }
 
   it '#sha' do

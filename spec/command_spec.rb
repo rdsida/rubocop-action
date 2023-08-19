@@ -2,7 +2,7 @@
 
 require './spec/spec_helper'
 
-describe Command do
+RSpec.describe Command do
   subject(:command) { Command.new(config) }
 
   describe '#build' do

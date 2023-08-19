@@ -2,7 +2,7 @@
 
 require './spec/spec_helper'
 
-describe Install do
+RSpec.describe Install do
   subject { described_class.new(config) }
 
   let(:config) { YAML.safe_load(config_file) }
@@ -50,7 +50,11 @@ describe Install do
         YAML
       end
 
-      it { expect(subject).to have_received(:system).with('gem install rubocop:0.79.0 rubocop-rails rubocop-rspec rubocop-graphql') }
+      it 'calls gem install with appropriate gems' do
+        expect(subject)
+          .to have_received(:system)
+          .with('gem install rubocop:0.79.0 rubocop-rails rubocop-rspec rubocop-graphql')
+      end
 
       context "when 'rubocop' is not included in the dependencies" do
         let(:config_file) do

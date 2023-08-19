@@ -2,7 +2,7 @@
 
 require './spec/spec_helper'
 
-describe Github::CheckRunService do
+RSpec.describe Github::CheckRunService do
   let(:rubocop_report) { double(build: JSON(File.read('./spec/fixtures/report.json'))) }
   let(:github_data) { Github::Data.new(event) }
   subject do

@@ -2,11 +2,11 @@
 
 module Helpers
   def event
-    {'repository': {
+    { 'repository': {
       'owner': {
-        'login': "event_login"
+        'login': 'event_login'
       },
-      'name': "event_name"
-    }}
+      'name': 'event_name'
+    } }
   end
 end

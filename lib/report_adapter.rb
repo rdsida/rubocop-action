@@ -2,13 +2,13 @@
 
 class ReportAdapter
   class << self
-    CONCLUSION_TYPES = {failure: "failure", success: "success"}.freeze
+    CONCLUSION_TYPES = { failure: 'failure', success: 'success' }.freeze
     ANNOTATION_LEVELS = {
-      "refactor" => "notice",
-      "convention" => "notice",
-      "warning" => "warning",
-      "error" => "failure",
-      "fatal" => "failure"
+      'refactor' => 'notice',
+      'convention' => 'notice',
+      'warning' => 'warning',
+      'error' => 'failure',
+      'fatal' => 'failure'
     }.freeze
 
     def conclusion(report)
@@ -26,18 +26,18 @@ class ReportAdapter
     end
 
     def annotations(report) # rubocop:disable Metrics/AbcSize
-      report["files"].each_with_object([]) do |file, annotation_list|
-        file["offenses"].each do |offense|
-          location, same_line = column_check(offense["location"])
+      report['files'].each_with_object([]) do |file, annotation_list|
+        file['offenses'].each do |offense|
+          location, same_line = column_check(offense['location'])
           annotation_list.push(
             {
-              'path': file["path"],
-              'start_line': location["start_line"],
-              'end_line': location["last_line"],
-              'start_column': (location["start_column"] if same_line),
-              'end_column': (location["last_column"] if same_line),
-              'annotation_level': annotation_level(offense["severity"]),
-              'message': "#{offense["message"]} [#{offense["cop_name"]}]"
+              'path': file['path'],
+              'start_line': location['start_line'],
+              'end_line': location['last_line'],
+              'start_column': (location['start_column'] if same_line),
+              'end_column': (location['last_column'] if same_line),
+              'annotation_level': annotation_level(offense['severity']),
+              'message': "#{offense['message']} [#{offense['cop_name']}]"
             }.compact.transform_keys!(&:to_s)
           )
         end
@@ -47,11 +47,11 @@ class ReportAdapter
     private
 
     def column_check(location)
-      same_line = location["start_line"] == location["last_line"]
-      has_columns = location["start_column"] && location["last_column"]
+      same_line = location['start_line'] == location['last_line']
+      has_columns = location['start_column'] && location['last_column']
 
-      if same_line && has_columns && location["start_column"] > location["last_column"]
-        location["start_column"], location["last_column"] = location["last_column"], location["start_column"]
+      if same_line && has_columns && location['start_column'] > location['last_column']
+        location['start_column'], location['last_column'] = location['last_column'], location['start_column']
       end
 
       [location, same_line]
@@ -62,11 +62,11 @@ class ReportAdapter
     end
 
     def total_offenses(report)
-      report.dig("summary", "offense_count")
+      report.dig('summary', 'offense_count')
     end
 
     def status_code(report)
-      report.dig("__exit_code")
+      report['__exit_code']
     end
   end
 end

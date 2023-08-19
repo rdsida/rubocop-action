@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-system("bin/rspec --format documentation")
+system('bin/rspec --format documentation')

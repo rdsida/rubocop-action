@@ -2,7 +2,7 @@
 
 class Install
   DEFAULT_DEPENDENCIES = {
-    "rubocop" => "latest"
+    'rubocop' => 'latest'
   }.freeze
 
   attr_reader :config
@@ -12,7 +12,7 @@ class Install
   end
 
   def run
-    return system("bundle install") if config.fetch("bundle", false)
+    return system('bundle install') if config.fetch('bundle', false)
 
     system("gem install #{dependencies}")
   end
@@ -20,11 +20,11 @@ class Install
   private
 
   def dependencies
-    DEFAULT_DEPENDENCIES.merge(custom_dependencies).map(&method(:version_string)).join(" ")
+    DEFAULT_DEPENDENCIES.merge(custom_dependencies).map(&method(:version_string)).join(' ')
   end
 
   def custom_dependencies
-    Hash[config.fetch("versions", []).map(&method(:version))]
+    Hash[config.fetch('versions', []).map(&method(:version))]
   end
 
   def version(dependency)
@@ -32,11 +32,11 @@ class Install
     when Hash
       dependency.first
     else
-      [dependency, "latest"]
+      [dependency, 'latest']
     end
   end
 
   def version_string(dependency, version)
-    version == "latest" ? dependency : "#{dependency}:#{version}"
+    version == 'latest' ? dependency : "#{dependency}:#{version}"
   end
 end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "open3"
+require 'open3'
 
 class Results
   attr_accessor :output, :status_code
@@ -25,6 +25,6 @@ class Results
   end
 
   def insert_exit_code
-    parsed_results["__exit_code"] = status_code
+    parsed_results['__exit_code'] = status_code
   end
 end

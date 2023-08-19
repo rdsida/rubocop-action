@@ -25,18 +25,18 @@ module Github
     def create_check
       check = client.send_request(
         url: endpoint_url,
-        method: "post",
+        method: 'post',
         body: create_check_payload
       )
-      puts "Check run created with id: #{check["id"]}."
-      [check["id"], check["started_at"]]
+      puts "Check run created with id: #{check['id']}."
+      [check['id'], check['started_at']]
     end
 
     def update_check(id, started_at)
       annotations.each_slice(SLICE_COUNT) do |annotations_slice|
         client.send_request(
           url: "#{endpoint_url}/#{id}",
-          method: "patch",
+          method: 'patch',
           body: update_check_payload(annotations_slice, started_at)
         )
         puts "Updated check run with #{annotations_slice.count} annotations."
@@ -46,15 +46,15 @@ module Github
     def complete_check(id, started_at)
       request = client.send_request(
         url: "#{endpoint_url}/#{id}",
-        method: "patch",
+        method: 'patch',
         body: completed_check_payload(started_at)
       )
-      puts "Completed check run."
+      puts 'Completed check run.'
       request
     end
 
     def client
-      @client ||= Github::Client.new(github_data.token, user_agent: "rubocop-linter-action")
+      @client ||= Github::Client.new(github_data.token, user_agent: 'rubocop-linter-action')
     end
 
     def summary
@@ -86,11 +86,11 @@ module Github
     end
 
     def create_check_payload
-      base_payload("in_progress")
+      base_payload('in_progress')
     end
 
     def completed_check_payload(started_at)
-      base_payload("completed").merge!(
+      base_payload('completed').merge!(
         conclusion: conclusion,
         started_at: started_at,
         completed_at: Time.now.iso8601
@@ -98,7 +98,7 @@ module Github
     end
 
     def update_check_payload(annotations, started_at)
-      base_payload("in_progress").merge!(
+      base_payload('in_progress').merge!(
         started_at: started_at,
         output: {
           title: check_name,

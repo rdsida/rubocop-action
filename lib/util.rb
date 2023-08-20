@@ -10,7 +10,7 @@ class Util
     end
 
     def read_yaml(path)
-      YAML.safe_load(File.read(path))
+      YAML.safe_load_file(path)
     rescue Errno::ENOENT
       p "Notice: No file: #{path}"
       {}

@@ -24,7 +24,7 @@ class Install
   end
 
   def custom_dependencies
-    Hash[config.fetch('versions', []).map(&method(:version))]
+    config.fetch('versions', []).map(&method(:version)).to_h
   end
 
   def version(dependency)

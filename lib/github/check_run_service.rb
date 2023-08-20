@@ -81,7 +81,7 @@ module Github
       {
         name: check_name,
         head_sha: github_data.sha,
-        status: status
+        status:
       }
     end
 
@@ -91,19 +91,19 @@ module Github
 
     def completed_check_payload(started_at)
       base_payload('completed').merge!(
-        conclusion: conclusion,
-        started_at: started_at,
+        conclusion:,
+        started_at:,
         completed_at: Time.now.iso8601
       )
     end
 
     def update_check_payload(annotations, started_at)
       base_payload('in_progress').merge!(
-        started_at: started_at,
+        started_at:,
         output: {
           title: check_name,
-          summary: summary,
-          annotations: annotations
+          summary:,
+          annotations:
         }
       )
     end

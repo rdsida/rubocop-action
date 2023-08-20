@@ -3,16 +3,17 @@
 require './spec/spec_helper'
 
 RSpec.describe Github::CheckRunService do
-  let(:rubocop_report) { double(build: JSON(File.read('./spec/fixtures/report.json'))) }
-  let(:github_data) { Github::Data.new(event) }
   subject do
-    Github::CheckRunService.new(
+    described_class.new(
       report: rubocop_report,
-      github_data: github_data,
+      github_data:,
       report_adapter: ReportAdapter,
       check_name: 'Test'
     )
   end
+
+  let(:rubocop_report) { double(build: JSON(File.read('./spec/fixtures/report.json'))) }
+  let(:github_data) { Github::Data.new(event) }
 
   it '#run' do
     stub_request(:any, 'https://api.github.com/repos/owner/repository_name/check-runs/id')

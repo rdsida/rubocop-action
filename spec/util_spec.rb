@@ -3,7 +3,7 @@
 require './spec/spec_helper'
 
 RSpec.describe Util do
-  subject { Util }
+  subject { described_class }
 
   context "path doesn't exist" do
     it '#read_json' do

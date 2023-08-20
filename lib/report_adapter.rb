@@ -31,13 +31,13 @@ class ReportAdapter
           location, same_line = column_check(offense['location'])
           annotation_list.push(
             {
-              'path': file['path'],
-              'start_line': location['start_line'],
-              'end_line': location['last_line'],
-              'start_column': (location['start_column'] if same_line),
-              'end_column': (location['last_column'] if same_line),
-              'annotation_level': annotation_level(offense['severity']),
-              'message': "#{offense['message']} [#{offense['cop_name']}]"
+              path: file['path'],
+              start_line: location['start_line'],
+              end_line: location['last_line'],
+              start_column: (location['start_column'] if same_line),
+              end_column: (location['last_column'] if same_line),
+              annotation_level: annotation_level(offense['severity']),
+              message: "#{offense['message']} [#{offense['cop_name']}]"
             }.compact.transform_keys!(&:to_s)
           )
         end

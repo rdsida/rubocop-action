@@ -20,17 +20,17 @@ module Github
       # Raise if this a request to cancel the check run to prevent a potential infinite loop
       raise "#{response.code}: #{response.message}: #{response.body}" if cancel_request
 
-      message_handler(response: response, url: url)
+      message_handler(response:, url:)
     end
 
     private
 
     def headers
       @headers ||= {
-        "Content-Type": 'application/json',
-        "Accept": 'application/vnd.github.antiope-preview+json',
-        "Authorization": "Bearer #{github_token}",
-        "User-Agent": user_agent
+        'Content-Type': 'application/json',
+        Accept: 'application/vnd.github.antiope-preview+json',
+        Authorization: "Bearer #{github_token}",
+        'User-Agent': user_agent
       }
     end
 
@@ -57,8 +57,8 @@ module Github
 
     def cancel_suite_payload(name, head_sha)
       {
-        name: name,
-        head_sha: head_sha,
+        name:,
+        head_sha:,
         status: 'completed',
         conclusion: 'failure',
         completed_at: Time.now.iso8601

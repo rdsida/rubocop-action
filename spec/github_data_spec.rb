@@ -3,7 +3,7 @@
 require './spec/spec_helper'
 
 RSpec.describe Github::Data do
-  subject { Github::Data.new(event) }
+  subject { described_class.new(event) }
 
   it '#sha' do
     expect(subject.sha).to eq('sha')

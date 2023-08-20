@@ -15,7 +15,7 @@ class Report
   private
 
   def report_path
-    ENV['REPORT_PATH']
+    ENV.fetch('REPORT_PATH', nil)
   end
 
   def results

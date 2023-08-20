@@ -4,7 +4,8 @@ source 'https://rubygems.org'
 
 group :development do
   gem 'github_changelog_generator', '~> 1.15'
-  gem 'standard', '0.6'
+  gem 'rubocop'
+  gem 'rubocop-rspec'
 end
 
 group :test do

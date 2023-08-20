@@ -16,15 +16,15 @@ unless ENV['CODECOV_TOKEN'].to_s.empty?
 end
 
 # require relatives ..........................................................
-require_relative './../lib/command'
-require_relative './../lib/github/check_run_service'
-require_relative './../lib/github/client'
-require_relative './../lib/github/data'
-require_relative './../lib/install'
-require_relative './../lib/report_adapter'
-require_relative './../lib/util'
-require_relative './../lib/results'
-require_relative './helpers'
+require_relative '../lib/command'
+require_relative '../lib/github/check_run_service'
+require_relative '../lib/github/client'
+require_relative '../lib/github/data'
+require_relative '../lib/install'
+require_relative '../lib/report_adapter'
+require_relative '../lib/util'
+require_relative '../lib/results'
+require_relative 'helpers'
 
 # environment variables ......................................................
 ENV['GITHUB_SHA'] = 'sha'

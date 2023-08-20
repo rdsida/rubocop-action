@@ -9,11 +9,11 @@ module Github
     end
 
     def sha
-      ENV['GITHUB_SHA']
+      ENV.fetch('GITHUB_SHA', nil)
     end
 
     def token
-      ENV['GITHUB_TOKEN']
+      ENV.fetch('GITHUB_TOKEN', nil)
     end
 
     def owner
@@ -25,7 +25,7 @@ module Github
     end
 
     def workspace
-      ENV['GITHUB_WORKSPACE']
+      ENV.fetch('GITHUB_WORKSPACE', nil)
     end
   end
 end

@@ -1,21 +1,21 @@
 # frozen_string_literal: true
 
-require "./spec/spec_helper"
+require './spec/spec_helper'
 
-describe Install do
+RSpec.describe Install do
   subject { described_class.new(config) }
 
   let(:config) { YAML.safe_load(config_file) }
 
   before { allow(subject).to receive(:system) }
 
-  describe "#run" do
+  describe '#run' do
     before { subject.run }
 
     context "when there's no configuration" do
-      let(:config_file) { "" }
+      let(:config_file) { '' }
 
-      it { expect(subject).to have_received(:system).with("gem install rubocop") }
+      it { expect(subject).to have_received(:system).with('gem install rubocop') }
     end
 
     context "when it's set to resolve dependencies through bundler" do
@@ -25,7 +25,7 @@ describe Install do
         YAML
       end
 
-      it { expect(subject).to have_received(:system).with("bundle install") }
+      it { expect(subject).to have_received(:system).with('bundle install') }
     end
 
     context "when there's no version specified" do
@@ -36,20 +36,25 @@ describe Install do
         YAML
       end
 
-      it { expect(subject).to have_received(:system).with("gem install rubocop") }
+      it { expect(subject).to have_received(:system).with('gem install rubocop') }
     end
 
-    context "when the versions are specified" do
+    context 'when the versions are specified' do
       let(:config_file) do
         <<~YAML
           versions:
             - rubocop: 0.79.0
             - rubocop-rails
             - rubocop-rspec: latest
+            - rubocop-graphql
         YAML
       end
 
-      it { expect(subject).to have_received(:system).with("gem install rubocop:0.79.0 rubocop-rails rubocop-rspec") }
+      it 'calls gem install with appropriate gems' do
+        expect(subject)
+          .to have_received(:system)
+          .with('gem install rubocop:0.79.0 rubocop-rails rubocop-rspec rubocop-graphql')
+      end
 
       context "when 'rubocop' is not included in the dependencies" do
         let(:config_file) do
@@ -60,7 +65,7 @@ describe Install do
           YAML
         end
 
-        it { expect(subject).to have_received(:system).with("gem install rubocop rubocop-rails rubocop-rspec:1.37.0") }
+        it { expect(subject).to have_received(:system).with('gem install rubocop rubocop-rails rubocop-rspec:1.37.0') }
       end
     end
   end

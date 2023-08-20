@@ -9,23 +9,23 @@ module Github
     end
 
     def sha
-      ENV["GITHUB_SHA"]
+      ENV.fetch('GITHUB_SHA', nil)
     end
 
     def token
-      ENV["GITHUB_TOKEN"]
+      ENV.fetch('GITHUB_TOKEN', nil)
     end
 
     def owner
-      ENV["GITHUB_REPOSITORY_OWNER"] || event.dig("repository", "owner", "login")
+      ENV['GITHUB_REPOSITORY_OWNER'] || event.dig('repository', 'owner', 'login')
     end
 
     def repo
-      ENV["GITHUB_REPOSITORY_NAME"] || event.dig("repository", "name")
+      ENV['GITHUB_REPOSITORY_NAME'] || event.dig('repository', 'name')
     end
 
     def workspace
-      ENV["GITHUB_WORKSPACE"]
+      ENV.fetch('GITHUB_WORKSPACE', nil)
     end
   end
 end
